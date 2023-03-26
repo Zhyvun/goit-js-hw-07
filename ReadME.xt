@@ -1,0 +1,120 @@
+! Завдання 1 - галерея зображень
+
+01-galery.js
+    1. Створення і рендер розмітки на підставі масиву даних galleryItems і наданого шаблону елемента галереї.
+    1.1. Створення посилання на об'єкти;
+    1.2. Додаємо рядок з HTML-тегами
+    1.3. Створення функції з необхідними стилями галереї  
+    (у колбек функцію передаємо елементи масиву даних galleryItems )
+
+Розмітка елемента галереї
+Посилання на оригінальне зображення повинно зберігатися в data-атрибуті source на елементі <img>, 
+і вказуватися в href посилання. Не додавай інші HTML теги або CSS класи, крім тих, що містяться в цьому шаблоні.
+
+<li class="gallery__item">
+  <a class="gallery__link" href="large-image.jpg">
+    <img
+      class="gallery__image"
+      src="small-image.jpg"
+      data-source="large-image.jpg"
+      alt="Image description"
+    />
+  </a>
+</li>
+
+    2. Реалізація делегування на ul.gallery і отримання url великого зображення.
+    2.1. Створююємо слухача для предачі фото збільшеного розміру 
+    2.2. Створююємо функцію виклику збільшеного зображення
+        Обов'язково перевіряємо мету кліка, щоб це точно була кнопка,тому що ми не хочемо обробляти кліки в елемент-контейнері. 
+        Для перевірки типу елемента використовуємо властивість nodeName.    
+    2.2.1 заборона поведінки
+    Зверни увагу на те, що зображення обгорнуте посиланням, отже по кліку за замовчуванням користувач буде перенаправлений 
+    на іншу сторінку. Заборони цю поведінку за замовчуванням.
+    2.2.2. Додай закриття модального вікна після натискання клавіші Escape. 
+    Зроби так, щоб прослуховування клавіатури було тільки доти, 
+    доки відкрите модальне вікно. 
+    2.2.3.Бібліотека basicLightbox містить метод для програмного закриття модального вікна.
+    -створення модального вікна об'єктом instance → викликаєм метод show()
+    -за допомогою властивості event.target.dataset.source беремо зображення, яке буде відображене в модальному вікні
+    - функції: onShow (вікно видиме→слідкуємо за натисканнмя кл.Escape); 
+    onclose (тицьнули кл.Escape → вікно закрилось, видалили обробник)
+
+01-gallery.html + 02-lightbox.html
+    3. Підключення скрипту і стилів бібліотеки модального вікна basicLightbox. 
+    Використовуй CDN сервіс jsdelivr і додай у проект посилання на мініфіковані (.min) файли бібліотеки.
+
+    4. Відкриття модального вікна по кліку на елементі галереї. Для цього ознайомся з документацією і прикладами.
+          https://www.jsdelivr.com/package/npm/basiclightbox?path=dist
+          .create(content, opts) - Creates a new basicLightbox instance.
+          instance.close() - Closes a lightbox instance.
+          onShow: (instance) => {}, - Function that gets executed before the lightbox closes.
+          onClose: (instance) => {}
+
+    5. Заміна значення атрибута src елемента <img> в модальному вікні перед відкриттям. 
+    Використовуй готову розмітку модального вікна із зображенням з прикладів бібліотеки basicLightbox.
+    https://basiclightbox.electerious.com/ 
+    Images (Add an img tag to your lightbox to display an image. 
+    basicLightbox detects the tag and displays the photo in a fully responsive way. 
+    Perfect for all screen sizes. Also works with the srcset attribute.)
+
+        -за допомогою властивості event.target.dataset.source беремо зображення, яке буде відображене в модальному вікні
+
+
+    //!Опціонально
+    Додай закриття модального вікна після натискання клавіші Escape. 
+    Зроби так, щоб прослуховування клавіатури було тільки доти, 
+    доки відкрите модальне вікно. Бібліотека basicLightbox містить 
+    метод для програмного закриття модального вікна.
+
+
+
+
+! Завдання 2 - бібліотека SimpleLightbox
+
+Зроби таку саму галерею як в першому завданні, але використовуючи бібліотеку SimpleLightbox, 
+яка візьме на себе обробку кліків по зображеннях, відкриття і закриття модального вікна, а також гортання зображень 
+за допомогою клавіатури.
+
+Необхідно трохи змінити розмітку картки галереї, використовуй цей шаблон.
+
+<li class="gallery__item">
+   <a class="gallery__link" href="large-image.jpg">
+      <img class="gallery__image" src="small-image.jpg" alt="Image description" />
+   </a>
+</li>
+
+
+Виконуй це завдання у файлах 02-lightbox.html і 02-lightbox.js. Розбий його на декілька підзавдань:
+ 
+ 02-lightbox.js.
+    1.1. Створення і рендер розмітки на підставі масиву даних galleryItems і наданого шаблону елемента галереї. 
+    Використовуй готовий код з першого завдання.
+
+02-lightbox.html
+   1.2. Підключення скрипту і стилів бібліотеки, використовуючи CDN сервіс cdnjs. 
+    Необхідно додати посилання на два файли: simple-lightbox.min.js і simple-lightbox.min.css.
+
+https://github.com/andreknieriem/simplelightbox
+https://cdnjs.com/libraries/simplelightbox
+
+
+    Ініціалізація бібліотеки після створення і додання елементів галереї у ul.gallery. 
+    Для цього ознайомся з документацією SimpleLightbox - насамперед секції «Usage» і «Markup».
+    https://simplelightbox.com/
+
+«Usage»
+ When using the standalone variant (`simple-lightbox(.min).js`)
+var lightbox = new SimpleLightbox('.gallery a', { /* options */ });
+
+«Markup»
+    For the default setup, you just need links that are pointing to images.
+
+<div class="gallery">
+    <a href="images/image1.jpg"><img src="images/thumbs/thumb1.jpg" alt="" title=""/></a>
+    <a href="images/image2.jpg"><img src="images/thumbs/thumb2.jpg" alt="" title="Beautiful Image"/></a>
+</div>
+    
+   1.4. Подивися в документації секцію «Options» і додай відображення підписів до зображень з атрибута alt (captionsData). 
+    Нехай підпис буде знизу (captionPosition) і з'являється через 250 мілісекунд після відкриття зображення (captionDelay).
+    
+    new SimpleLightbox('.some-element a', { /* options */ }); - https://simplelightbox.com/
